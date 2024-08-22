@@ -1,3 +1,46 @@
+// Modo Oscuro
+const toggleDarkModeButton = document.getElementById("toggleDarkMode");
+toggleDarkModeButton.addEventListener("click", function () {
+  document.body.classList.toggle("dark-mode");
+  const isDarkMode = document.body.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode);
+});
+
+// Cargar preferencia de modo oscuro al iniciar
+document.addEventListener("DOMContentLoaded", () => {
+  const darkMode = JSON.parse(localStorage.getItem("darkMode"));
+  if (darkMode) {
+    document.body.classList.add("dark-mode");
+  }
+
+  // Cargar usuario si existe
+  const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+  if (usuarioGuardado) {
+    mostrarMensajeUsuario(`Bienvenido de nuevo, ${usuarioGuardado.nombre}`);
+  }
+});
+
+// Crear Usuario
+document
+  .getElementById("usuario-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Evita que el formulario se envíe
+
+    const nombre = document.getElementById("nombre").value;
+    const email = document.getElementById("email").value;
+
+    const usuario = { nombre, email };
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    mostrarMensajeUsuario(`Usuario creado exitosamente. Bienvenido, ${nombre}`);
+  });
+
+// Función para mostrar mensaje de usuario
+function mostrarMensajeUsuario(mensaje) {
+  const mensajeUsuario = document.getElementById("mensajeUsuario");
+  mensajeUsuario.textContent = mensaje;
+}
+
 // Función que calcula la cuota mensual de un préstamo
 function calcularCuota({ capital, tasaInteresAnual, plazoEnAnios }) {
   const tasaInteresMensual = tasaInteresAnual / 100 / 12;
@@ -71,13 +114,3 @@ document
       listaSimulaciones.appendChild(simulacionDiv);
     });
   });
-
-// Operadores avanzados: Destructuring y spread
-// Aquí se usa destructuring en el cálculo de la cuota y spread para crear un nuevo objeto prestamo con propiedades adicionales
-function ejemploOperadoresAvanzados() {
-  const prestamoBase = { capital: 10000, tasaInteresAnual: 5, plazoEnAnios: 5 };
-  const nuevoPrestamo = { ...prestamoBase, tasaInteresAnual: 4.5 }; // Sobreescribe la tasa de interés
-  console.log(nuevoPrestamo); // { capital: 10000, tasaInteresAnual: 4.5, plazoEnAnios: 5 }
-}
-
-ejemploOperadoresAvanzados();

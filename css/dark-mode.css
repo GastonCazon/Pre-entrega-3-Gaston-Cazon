@@ -1,0 +1,36 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: black;
+  margin: 20px;
+  padding: 20px;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+#resultado {
+  margin-top: 20px;
+}
+
+#simulaciones {
+  margin-top: 30px;
+}
